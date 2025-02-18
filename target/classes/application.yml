@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ttp
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1200000
+
+  task:
+    execution:
+      pool:
+        core-size: ${CPU_CORES:4}  # 시스템 CPU 코어 수 (기본값 4)
+        max-size: ${CPU_CORES_X2:8}  # 코어 수의 2배 (기본값 8)
+        queue-capacity: 50
+        keep-alive: 60s
+      thread-name-prefix: async-
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc.batch_size: 50
+        order_inserts: true
+        order_updates: true
+        connection.provider_disables_autocommit: true
+        ddl-auto: update  # 테이블 자동 생성/수정
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true  # SQL 쿼리 로그 출력
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration

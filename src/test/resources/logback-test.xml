@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Spring 프레임워크 로그는 ERROR 레벨에서만 출력 -->
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="com.zaxxer.hikari" level="ERROR"/>
+    <logger name="org.apache" level="ERROR"/>
+    
+    <!-- 성능 테스트 로그는 INFO 레벨로 출력 -->
+    <logger name="org.ttp.ttpspring.Liar.service.LiarGameServicePerformanceTest" level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <logger name="org.ttp.ttpspring.Liar.service" level="DEBUG"/>
+    <logger name="org.springframework.data.redis" level="DEBUG"/>
+    <logger name="io.lettuce.core" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
